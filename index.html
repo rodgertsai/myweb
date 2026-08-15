@@ -3,114 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>健康狀態記錄</title>
-  <!-- 引入 Tailwind CSS -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>健康狀態記錄簿</title>
+  
+  <!-- 引入 Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
   <style>
-    /* 選中狀態卡片的自訂動畫與樣式 */
-    .status-radio:checked + div {
+    /* 選中項目高亮與光暈效果 */
+    .status-input:checked + .status-card {
       border-color: #2563eb;
       background-color: #eff6ff;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
     }
-    .status-radio:checked + div .check-indicator {
+    .status-input:checked + .status-card .status-radio-dot {
       border-color: #2563eb;
       background-color: #2563eb;
     }
   </style>
 </head>
-<body class="bg-slate-100 text-slate-800 min-h-screen p-4 sm:p-6 lg:p-8 flex justify-center items-start">
+<body class="bg-slate-100 text-slate-800 min-h-screen py-6 px-3 sm:px-6 flex justify-center items-start">
 
-  <div class="w-full max-w-xl bg-white rounded-2xl shadow-md border border-slate-200/80 p-5 sm:p-7 space-y-6">
+  <div class="w-full max-w-lg bg-white rounded-2xl shadow-md border border-slate-200 p-5 sm:p-7 space-y-6">
     
-    <!-- 標題區塊 -->
+    <!-- 頁面標題 -->
     <header class="border-b border-slate-100 pb-4 text-center sm:text-left">
-      <h1 class="text-2xl font-bold text-slate-900 tracking-tight flex items-center justify-center sm:justify-start gap-2">
-        <span class="text-blue-600">📋</span> 晨間健康狀態記錄
-      </h1>
-      <p class="text-sm text-slate-500 mt-1">追蹤夜尿次數與晨起精神狀態</p>
+      <div class="flex items-center justify-between">
+        <h1 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
+          <span class="text-blue-600">📊</span> 健康狀態記錄
+        </h1>
+        <span class="text-xs bg-blue-50 text-blue-700 font-semibold px-2.5 py-1 rounded-full border border-blue-200">
+          v2.0
+        </span>
+      </div>
+      <p class="text-xs sm:text-sm text-slate-500 mt-1">追蹤夜尿狀況與晨起精神狀態</p>
     </header>
 
-    <!-- 表單區塊 -->
-    <form id="healthForm" class="space-y-5">
+    <!-- 主表單 -->
+    <form id="trackerForm" class="space-y-5">
       
-      <!-- 記錄日期 -->
+      <!-- 1. 記錄日期 -->
       <div>
-        <label for="recordDate" class="block text-sm font-semibold text-slate-700 mb-1">記錄日期</label>
+        <label for="recordDate" class="block text-sm font-bold text-slate-700 mb-1.5">
+          📅 記錄日期
+        </label>
         <input type="date" id="recordDate" required
-               class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-slate-800 text-sm">
+               class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-slate-800 text-sm font-medium bg-white">
       </div>
 
-      <!-- 五種健康狀態單選清單 -->
+      <!-- 2. 五個健康狀態選項 -->
       <div>
-        <label class="block text-sm font-semibold text-slate-700 mb-2">昨夜與晨起狀態選擇</label>
-        <div class="space-y-2.5" id="statusOptions">
-
-          <!-- 狀態 1：翡翠綠 -->
+        <label class="block text-sm font-bold text-slate-700 mb-2">
+          🛌 晨起與夜尿狀態
+        </label>
+        
+        <div class="space-y-2.5" id="statusGroup">
+          
+          <!-- 選項 1：綠色 -->
           <label class="block cursor-pointer">
-            <input type="radio" name="healthStatus" value="1. 無夜尿(狀態佳)" class="hidden status-radio" checked>
-            <div class="p-3.5 rounded-xl border-2 border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition flex items-center justify-between">
+            <input type="radio" name="healthOption" value="1. 無夜尿(狀態佳)" class="hidden status-input" checked>
+            <div class="status-card p-3.5 rounded-xl border-2 border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <span class="w-4 h-4 rounded-md bg-emerald-500 shadow-sm shrink-0"></span>
-                <span class="font-medium text-slate-800 text-sm sm:text-base">1. 無夜尿（狀態佳）</span>
+                <span class="text-sm sm:text-base font-semibold text-slate-800">1. 無夜尿（狀態佳）</span>
               </div>
-              <div class="w-5 h-5 rounded-full border-2 border-slate-300 check-indicator flex items-center justify-center">
+              <div class="status-radio-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center shrink-0">
                 <div class="w-2 h-2 rounded-full bg-white"></div>
               </div>
             </div>
           </label>
 
-          <!-- 狀態 2：草綠/萊姆綠 -->
+          <!-- 選項 2：淺綠色 -->
           <label class="block cursor-pointer">
-            <input type="radio" name="healthStatus" value="2. 無夜尿(狀態欠佳)" class="hidden status-radio">
-            <div class="p-3.5 rounded-xl border-2 border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition flex items-center justify-between">
+            <input type="radio" name="healthOption" value="2. 無夜尿(狀態欠佳)" class="hidden status-input">
+            <div class="status-card p-3.5 rounded-xl border-2 border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <span class="w-4 h-4 rounded-md bg-lime-500 shadow-sm shrink-0"></span>
-                <span class="font-medium text-slate-800 text-sm sm:text-base">2. 無夜尿（狀態欠佳）</span>
+                <span class="text-sm sm:text-base font-semibold text-slate-800">2. 無夜尿（狀態欠佳）</span>
               </div>
-              <div class="w-5 h-5 rounded-full border-2 border-slate-300 check-indicator flex items-center justify-center">
+              <div class="status-radio-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center shrink-0">
                 <div class="w-2 h-2 rounded-full bg-white"></div>
               </div>
             </div>
           </label>
 
-          <!-- 狀態 3：琥珀黃 -->
+          <!-- 選項 3：琥珀黃 -->
           <label class="block cursor-pointer">
-            <input type="radio" name="healthStatus" value="3. 夜尿一次(尚有精神)" class="hidden status-radio">
-            <div class="p-3.5 rounded-xl border-2 border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition flex items-center justify-between">
+            <input type="radio" name="healthOption" value="3. 夜尿一次(尚有精神)" class="hidden status-input">
+            <div class="status-card p-3.5 rounded-xl border-2 border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <span class="w-4 h-4 rounded-md bg-amber-500 shadow-sm shrink-0"></span>
-                <span class="font-medium text-slate-800 text-sm sm:text-base">3. 夜尿一次（尚有精神）</span>
+                <span class="text-sm sm:text-base font-semibold text-slate-800">3. 夜尿一次（尚有精神）</span>
               </div>
-              <div class="w-5 h-5 rounded-full border-2 border-slate-300 check-indicator flex items-center justify-center">
+              <div class="status-radio-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center shrink-0">
                 <div class="w-2 h-2 rounded-full bg-white"></div>
               </div>
             </div>
           </label>
 
-          <!-- 狀態 4：暖橘色 -->
+          <!-- 選項 4：暖橘色 -->
           <label class="block cursor-pointer">
-            <input type="radio" name="healthStatus" value="4. 夜尿一次(沒精神)" class="hidden status-radio">
-            <div class="p-3.5 rounded-xl border-2 border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition flex items-center justify-between">
+            <input type="radio" name="healthOption" value="4. 夜尿一次(沒精神)" class="hidden status-input">
+            <div class="status-card p-3.5 rounded-xl border-2 border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <span class="w-4 h-4 rounded-md bg-orange-500 shadow-sm shrink-0"></span>
-                <span class="font-medium text-slate-800 text-sm sm:text-base">4. 夜尿一次（沒精神）</span>
+                <span class="text-sm sm:text-base font-semibold text-slate-800">4. 夜尿一次（沒精神）</span>
               </div>
-              <div class="w-5 h-5 rounded-full border-2 border-slate-300 check-indicator flex items-center justify-center">
+              <div class="status-radio-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center shrink-0">
                 <div class="w-2 h-2 rounded-full bg-white"></div>
               </div>
             </div>
           </label>
 
-          <!-- 狀態 5：警示紅 -->
+          <!-- 選項 5：紅色 -->
           <label class="block cursor-pointer">
-            <input type="radio" name="healthStatus" value="5. 夜尿兩次以上" class="hidden status-radio">
-            <div class="p-3.5 rounded-xl border-2 border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition flex items-center justify-between">
+            <input type="radio" name="healthOption" value="5. 夜尿兩次以上" class="hidden status-input">
+            <div class="status-card p-3.5 rounded-xl border-2 border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <span class="w-4 h-4 rounded-md bg-rose-500 shadow-sm shrink-0"></span>
-                <span class="font-medium text-slate-800 text-sm sm:text-base">5. 夜尿兩次以上</span>
+                <span class="text-sm sm:text-base font-semibold text-slate-800">5. 夜尿兩次以上</span>
               </div>
-              <div class="w-5 h-5 rounded-full border-2 border-slate-300 check-indicator flex items-center justify-center">
+              <div class="status-radio-dot w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center shrink-0">
                 <div class="w-2 h-2 rounded-full bg-white"></div>
               </div>
             </div>
@@ -119,108 +134,122 @@
         </div>
       </div>
 
-      <!-- 備註輸入框 -->
+      <!-- 3. 備註輸入框 -->
       <div>
-        <label for="notes" class="block text-sm font-semibold text-slate-700 mb-1">備註說明</label>
-        <textarea id="notes" rows="3" placeholder="選填，可輸入入睡狀況、特殊症狀或心情備註..."
+        <label for="recordNotes" class="block text-sm font-bold text-slate-700 mb-1.5">
+          📝 備註事項
+        </label>
+        <textarea id="recordNotes" rows="3" placeholder="（選填）紀錄入睡時間、晚餐飲食、特殊症狀或活動心得..."
                   class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-slate-800 text-sm resize-none"></textarea>
       </div>
 
-      <!-- 操作按鈕區 -->
+      <!-- 4. 操作按鈕 -->
       <div class="pt-2 flex flex-col sm:flex-row gap-3">
         <button type="submit"
-                class="w-full sm:flex-1 py-3 px-5 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-semibold rounded-xl shadow-sm transition duration-150 flex items-center justify-center gap-2">
+                class="w-full sm:flex-1 py-3 px-5 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-bold rounded-xl shadow transition duration-150 flex items-center justify-center gap-2">
           <span>💾</span> 提交記錄
         </button>
         <button type="button" id="exportBtn"
-                class="w-full sm:w-auto py-3 px-5 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-semibold rounded-xl shadow-sm transition duration-150 flex items-center justify-center gap-2">
+                class="w-full sm:w-auto py-3 px-5 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-bold rounded-xl shadow transition duration-150 flex items-center justify-center gap-2">
           <span>📊</span> 匯出 CSV
         </button>
       </div>
 
     </form>
 
-    <!-- 歷史紀錄展示區 -->
+    <!-- 歷史紀錄區域 -->
     <section class="border-t border-slate-100 pt-5">
       <div class="flex items-center justify-between mb-3">
-        <h2 class="text-base font-bold text-slate-900">最近記錄</h2>
-        <span id="recordCount" class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-medium">0 筆</span>
+        <h2 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+          <span>🕒</span> 歷史記錄
+        </h2>
+        <span id="totalBadge" class="text-xs bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full font-bold">
+          0 筆
+        </span>
       </div>
-      <div id="historyList" class="space-y-2.5 max-h-64 overflow-y-auto pr-1">
-        <!-- JS 動態渲染歷史記錄 -->
+
+      <!-- 列表容器 -->
+      <div id="logsContainer" class="space-y-2.5 max-h-72 overflow-y-auto pr-1">
+        <!-- JS 動態插入 -->
       </div>
     </section>
 
   </div>
 
   <script>
-    const STORAGE_KEY = 'daily_health_tracker_logs';
+    const STORAGE_KEY = 'health_tracker_records_v2';
 
-    // 狀態對應的顏色標籤樣式
-    const statusBadges = {
-      '1': 'bg-emerald-100 text-emerald-800 border-emerald-200',
-      '2': 'bg-lime-100 text-lime-800 border-lime-200',
-      '3': 'bg-amber-100 text-amber-800 border-amber-200',
-      '4': 'bg-orange-100 text-orange-800 border-orange-200',
-      '5': 'bg-rose-100 text-rose-800 border-rose-200'
+    // 狀態對應色彩樣式
+    const badgeColors = {
+      '1': 'bg-emerald-50 text-emerald-700 border-emerald-200',
+      '2': 'bg-lime-50 text-lime-700 border-lime-200',
+      '3': 'bg-amber-50 text-amber-700 border-amber-200',
+      '4': 'bg-orange-50 text-orange-700 border-orange-200',
+      '5': 'bg-rose-50 text-rose-700 border-rose-200'
     };
 
-    // 初始化日期輸入框為今天
+    // 自動帶入當前日期
     const dateInput = document.getElementById('recordDate');
     dateInput.value = new Date().toISOString().split('T')[0];
 
-    // 取得所有紀錄
-    function getLogs() {
+    // 讀取 LocalStorage
+    function fetchLogs() {
       try {
         return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-      } catch (e) {
+      } catch (err) {
         return [];
       }
     }
 
-    // 儲存紀錄
-    function saveLogs(logs) {
+    // 儲存至 LocalStorage
+    function persistLogs(logs) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
     }
 
-    // 渲染歷史列表
-    function renderHistory() {
-      const logs = getLogs();
-      const listEl = document.getElementById('historyList');
-      const countEl = document.getElementById('recordCount');
+    // 渲染歷史清單
+    function renderList() {
+      const logs = fetchLogs();
+      const container = document.getElementById('logsContainer');
+      const badge = document.getElementById('totalBadge');
       
-      countEl.textContent = `${logs.length} 筆`;
+      badge.textContent = `${logs.length} 筆`;
 
       if (logs.length === 0) {
-        listEl.innerHTML = `<div class="text-center py-6 text-slate-400 text-sm">目前尚無任何紀錄</div>`;
+        container.innerHTML = `
+          <div class="text-center py-8 text-slate-400 text-sm border-2 border-dashed border-slate-100 rounded-xl">
+            目前尚無紀錄，請於上方填寫後提交
+          </div>
+        `;
         return;
       }
 
-      listEl.innerHTML = logs.map((item, index) => {
-        const statusCode = item.status.charAt(0);
-        const badgeClass = statusBadges[statusCode] || 'bg-slate-100 text-slate-800 border-slate-200';
+      container.innerHTML = logs.map((item, index) => {
+        const code = item.status.charAt(0);
+        const style = badgeColors[code] || 'bg-slate-100 text-slate-700 border-slate-200';
 
         return `
-          <div class="p-3 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start justify-between gap-3 text-sm">
-            <div class="space-y-1">
-              <div class="flex items-center gap-2">
-                <span class="font-semibold text-slate-800">${item.date}</span>
-                <span class="text-xs px-2 py-0.5 font-medium rounded-md border ${badgeClass}">
+          <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start justify-between gap-3 text-sm">
+            <div class="space-y-1.5 flex-1">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="font-bold text-slate-800">${item.date}</span>
+                <span class="text-xs px-2 py-0.5 font-bold rounded-md border ${style}">
                   ${item.status}
                 </span>
               </div>
-              ${item.notes ? `<p class="text-slate-600 text-xs">${escapeHtml(item.notes)}</p>` : ''}
-              <span class="text-[11px] text-slate-400 block">記錄時間：${item.timestamp}</span>
+              ${item.notes ? `<p class="text-slate-600 text-xs leading-relaxed break-words bg-white/70 p-2 rounded-lg border border-slate-100">${escapeHtml(item.notes)}</p>` : ''}
+              <div class="text-[11px] text-slate-400">記錄時間：${item.time}</div>
             </div>
-            <button onclick="deleteLog(${index})" class="text-slate-400 hover:text-red-500 p-1 text-xs transition" title="刪除此筆">
-              ✕
+            <button onclick="removeItem(${index})" class="text-slate-400 hover:text-rose-600 p-1 transition" title="刪除">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
             </button>
           </div>
         `;
       }).join('');
     }
 
-    // XSS 防護字元跳脫
+    // HTML 安全跳脫
     function escapeHtml(str) {
       return str.replace(/[&<>'"]/g, tag => ({
         '&': '&amp;',
@@ -231,89 +260,86 @@
       }[tag] || tag));
     }
 
-    // 刪除單筆紀錄
-    window.deleteLog = function(index) {
-      if (confirm('確定要刪除這筆記錄嗎？')) {
-        const logs = getLogs();
+    // 刪除紀錄
+    window.removeItem = function(index) {
+      if (confirm('確定要刪除這筆健康記錄嗎？')) {
+        const logs = fetchLogs();
         logs.splice(index, 1);
-        saveLogs(logs);
-        renderHistory();
+        persistLogs(logs);
+        renderList();
       }
     };
 
-    // 表單提交事件
-    document.getElementById('healthForm').addEventListener('submit', function(e) {
+    // 表單提交
+    document.getElementById('trackerForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      
+
       const date = dateInput.value;
-      const statusRadio = document.querySelector('input[name="healthStatus"]:checked');
+      const statusRadio = document.querySelector('input[name="healthOption"]:checked');
       const status = statusRadio ? statusRadio.value : '';
-      const notes = document.getElementById('notes').value.trim();
+      const notes = document.getElementById('recordNotes').value.trim();
       const now = new Date();
-      const timestamp = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+      const time = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
 
-      const newEntry = {
-        date,
-        status,
-        notes,
-        timestamp
-      };
+      const newRecord = { date, status, notes, time };
 
-      const logs = getLogs();
-      logs.unshift(newEntry);
-      saveLogs(logs);
+      const logs = fetchLogs();
+      logs.unshift(newRecord);
+      persistLogs(logs);
 
-      document.getElementById('notes').value = '';
-      renderHistory();
-      alert('✅ 記錄已成功儲存！');
+      // 清空備註
+      document.getElementById('recordNotes').value = '';
+      renderList();
+      alert('✅ 健康記錄已儲存！');
     });
 
-    // 匯出 CSV 功能（含 UTF-8 BOM 確保 Excel 中文不亂碼）
+    // 匯出 CSV（含 UTF-8 BOM）
     document.getElementById('exportBtn').addEventListener('click', function() {
-      const logs = getLogs();
+      const logs = fetchLogs();
       if (logs.length === 0) {
-        alert('目前尚無任何紀錄可供匯出。');
+        alert('目前沒有任何紀錄可匯出。');
         return;
       }
 
-      let csvContent = "\uFEFF";
-      csvContent += "記錄日期,狀態,備註,記錄時間\n";
+      let csv = "\uFEFF"; // 加入 UTF-8 BOM 避免 Excel 開啟中文亂碼
+      csv += "記錄日期,狀態,備註事項,記錄時間\n";
 
-      logs.forEach(row => {
-        const cleanNotes = (row.notes || '').replace(/"/g, '""');
-        csvContent += `"${row.date}","${row.status}","${cleanNotes}","${row.timestamp}"\n`;
+      logs.forEach(item => {
+        const cleanNotes = (item.notes || '').replace(/"/g, '""');
+        csv += `"${item.date}","${item.status}","${cleanNotes}","${item.time}"\n`;
       });
 
-      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-      const fileName = `健康狀態記錄_${new Date().toISOString().split('T')[0]}.csv`;
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const filename = `健康狀態記錄_${new Date().toISOString().split('T')[0]}.csv`;
 
-      if (navigator.canShare && navigator.canShare({ files: [new File([blob], fileName, { type: 'text/csv' })] })) {
-        const file = new File([blob], fileName, { type: 'text/csv' });
+      // 優先使用 Web Share API（手機可直接儲存至 Google Drive 或檔案）
+      if (navigator.canShare && navigator.canShare({ files: [new File([blob], filename, { type: 'text/csv' })] })) {
+        const file = new File([blob], filename, { type: 'text/csv' });
         navigator.share({
           files: [file],
-          title: '健康狀態記錄匯出',
-          text: '這是我的健康與夜尿狀態記錄 CSV 檔案'
+          title: '匯出健康狀態記錄',
+          text: '健康記錄 CSV 檔案'
         }).catch(() => {
-          triggerDownload(blob, fileName);
+          downloadFile(blob, filename);
         });
       } else {
-        triggerDownload(blob, fileName);
+        downloadFile(blob, filename);
       }
     });
 
-    function triggerDownload(blob, fileName) {
+    function downloadFile(blob, filename) {
       const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.setAttribute('href', url);
-      link.setAttribute('download', fileName);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
       URL.revokeObjectURL(url);
     }
 
     // 初次載入渲染
-    renderHistory();
+    renderList();
   </script>
 </body>
 </html>
