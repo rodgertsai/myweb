@@ -12,7 +12,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   
   <style>
-    /* 選中項目高亮與光暈效果 */
+    /* 單選狀態卡片選中高亮 */
     .status-input:checked + .status-card {
       border-color: #2563eb;
       background-color: #eff6ff;
@@ -21,6 +21,17 @@
     .status-input:checked + .status-card .status-radio-dot {
       border-color: #2563eb;
       background-color: #2563eb;
+    }
+
+    /* 複選症狀卡片選中高亮 */
+    .symptom-checkbox:checked + .symptom-card {
+      border-color: #3b82f6;
+      background-color: #eff6ff;
+    }
+    .symptom-checkbox:checked + .symptom-card .check-box-icon {
+      border-color: #2563eb;
+      background-color: #2563eb;
+      color: white;
     }
   </style>
 </head>
@@ -35,14 +46,14 @@
           <span class="text-blue-600">📊</span> 健康狀態記錄
         </h1>
         <span class="text-xs bg-blue-50 text-blue-700 font-semibold px-2.5 py-1 rounded-full border border-blue-200">
-          v2.0
+          v2.2
         </span>
       </div>
-      <p class="text-xs sm:text-sm text-slate-500 mt-1">追蹤夜尿狀況與晨起精神狀態</p>
+      <p class="text-xs sm:text-sm text-slate-500 mt-1">追蹤夜尿狀況、身體症狀與晨起精神</p>
     </header>
 
     <!-- 主表單 -->
-    <form id="trackerForm" class="space-y-5">
+    <form id="trackerForm" class="space-y-6">
       
       <!-- 1. 記錄日期 -->
       <div>
@@ -53,10 +64,10 @@
                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-slate-800 text-sm font-medium bg-white">
       </div>
 
-      <!-- 2. 五個健康狀態選項 -->
+      <!-- 2. 五個夜尿與精神狀態（單選） -->
       <div>
         <label class="block text-sm font-bold text-slate-700 mb-2">
-          🛌 晨起與夜尿狀態
+          🛌 晨起與夜尿狀態（單選）
         </label>
         
         <div class="space-y-2.5" id="statusGroup">
@@ -134,7 +145,73 @@
         </div>
       </div>
 
-      <!-- 3. 備註輸入框 -->
+      <!-- 3. 身體不適症狀（可複選 Group） -->
+      <div>
+        <label class="block text-sm font-bold text-slate-700 mb-2">
+          🩺 身體不適症狀（可複選）
+        </label>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="symptomsGroup">
+          
+          <!-- a. 脖子神經痛 -->
+          <label class="block cursor-pointer">
+            <input type="checkbox" name="symptoms" value="脖子神經痛" class="hidden symptom-checkbox">
+            <div class="symptom-card p-3 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition flex items-center justify-between">
+              <span class="text-sm font-medium text-slate-800">a. 脖子神經痛</span>
+              <div class="check-box-icon w-5 h-5 rounded-md border border-slate-300 flex items-center justify-center text-xs transition">
+                ✓
+              </div>
+            </div>
+          </label>
+
+          <!-- b. 尾椎神經痛 -->
+          <label class="block cursor-pointer">
+            <input type="checkbox" name="symptoms" value="尾椎神經痛" class="hidden symptom-checkbox">
+            <div class="symptom-card p-3 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition flex items-center justify-between">
+              <span class="text-sm font-medium text-slate-800">b. 尾椎神經痛</span>
+              <div class="check-box-icon w-5 h-5 rounded-md border border-slate-300 flex items-center justify-center text-xs transition">
+                ✓
+              </div>
+            </div>
+          </label>
+
+          <!-- c. 膝蓋無力 -->
+          <label class="block cursor-pointer">
+            <input type="checkbox" name="symptoms" value="膝蓋無力" class="hidden symptom-checkbox">
+            <div class="symptom-card p-3 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition flex items-center justify-between">
+              <span class="text-sm font-medium text-slate-800">c. 膝蓋無力</span>
+              <div class="check-box-icon w-5 h-5 rounded-md border border-slate-300 flex items-center justify-center text-xs transition">
+                ✓
+              </div>
+            </div>
+          </label>
+
+          <!-- d. 心臟不適 -->
+          <label class="block cursor-pointer">
+            <input type="checkbox" name="symptoms" value="心臟不適" class="hidden symptom-checkbox">
+            <div class="symptom-card p-3 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition flex items-center justify-between">
+              <span class="text-sm font-medium text-slate-800">d. 心臟不適</span>
+              <div class="check-box-icon w-5 h-5 rounded-md border border-slate-300 flex items-center justify-center text-xs transition">
+                ✓
+              </div>
+            </div>
+          </label>
+
+          <!-- e. 其他不適 (佔滿寬度) -->
+          <label class="block cursor-pointer sm:col-span-2">
+            <input type="checkbox" name="symptoms" value="其他不適" class="hidden symptom-checkbox">
+            <div class="symptom-card p-3 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition flex items-center justify-between">
+              <span class="text-sm font-medium text-slate-800">e. 其他不適</span>
+              <div class="check-box-icon w-5 h-5 rounded-md border border-slate-300 flex items-center justify-center text-xs transition">
+                ✓
+              </div>
+            </div>
+          </label>
+
+        </div>
+      </div>
+
+      <!-- 4. 備註輸入框 -->
       <div>
         <label for="recordNotes" class="block text-sm font-bold text-slate-700 mb-1.5">
           📝 備註事項
@@ -143,7 +220,7 @@
                   class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-slate-800 text-sm resize-none"></textarea>
       </div>
 
-      <!-- 4. 操作按鈕 -->
+      <!-- 5. 操作按鈕 -->
       <div class="pt-2 flex flex-col sm:flex-row gap-3">
         <button type="submit"
                 class="w-full sm:flex-1 py-3 px-5 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-bold rounded-xl shadow transition duration-150 flex items-center justify-center gap-2">
@@ -206,6 +283,12 @@
       localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
     }
 
+    // 重設表單狀態
+    function resetFormInputs() {
+      document.getElementById('recordNotes').value = '';
+      document.querySelectorAll('input[name="symptoms"]').forEach(cb => cb.checked = false);
+    }
+
     // 渲染歷史清單
     function renderList() {
       const logs = fetchLogs();
@@ -226,6 +309,14 @@
       container.innerHTML = logs.map((item, index) => {
         const code = item.status.charAt(0);
         const style = badgeColors[code] || 'bg-slate-100 text-slate-700 border-slate-200';
+        
+        // 症狀標籤 HTML
+        const symptomsArr = item.symptoms ? (Array.isArray(item.symptoms) ? item.symptoms : item.symptoms.split(';')) : [];
+        const symptomsHtml = symptomsArr.length > 0 ? `
+          <div class="flex flex-wrap gap-1 mt-1">
+            ${symptomsArr.map(s => `<span class="text-[11px] px-2 py-0.5 bg-rose-50 text-rose-600 border border-rose-200/80 rounded-md font-medium">⚠️ ${escapeHtml(s)}</span>`).join('')}
+          </div>
+        ` : '';
 
         return `
           <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl flex items-start justify-between gap-3 text-sm">
@@ -236,10 +327,13 @@
                   ${item.status}
                 </span>
               </div>
+              
+              ${symptomsHtml}
+
               ${item.notes ? `<p class="text-slate-600 text-xs leading-relaxed break-words bg-white/70 p-2 rounded-lg border border-slate-100">${escapeHtml(item.notes)}</p>` : ''}
-              <div class="text-[11px] text-slate-400">記錄時間：${item.time}</div>
+              <div class="text-[11px] text-slate-400">最後更新：${item.time}</div>
             </div>
-            <button onclick="removeItem(${index})" class="text-slate-400 hover:text-rose-600 p-1 transition" title="刪除">
+            <button onclick="removeItem(${index})" class="text-slate-400 hover:text-rose-600 p-1 transition shrink-0" title="刪除">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
               </svg>
@@ -270,27 +364,49 @@
       }
     };
 
-    // 表單提交
+    // 表單提交（後蓋前邏輯）
     document.getElementById('trackerForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
       const date = dateInput.value;
       const statusRadio = document.querySelector('input[name="healthOption"]:checked');
       const status = statusRadio ? statusRadio.value : '';
+      
+      // 收集複選症狀
+      const checkedSymptoms = Array.from(document.querySelectorAll('input[name="symptoms"]:checked')).map(cb => cb.value);
+      
       const notes = document.getElementById('recordNotes').value.trim();
       const now = new Date();
       const time = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
 
-      const newRecord = { date, status, notes, time };
-
+      const newRecord = { 
+        date, 
+        status, 
+        symptoms: checkedSymptoms, 
+        notes, 
+        time 
+      };
+      
       const logs = fetchLogs();
-      logs.unshift(newRecord);
-      persistLogs(logs);
 
-      // 清空備註
-      document.getElementById('recordNotes').value = '';
-      renderList();
-      alert('✅ 健康記錄已儲存！');
+      // 檢查是否已有相同日期的紀錄
+      const existingIndex = logs.findIndex(item => item.date === date);
+
+      if (existingIndex !== -1) {
+        // 覆蓋當天資料
+        logs[existingIndex] = newRecord;
+        persistLogs(logs);
+        resetFormInputs();
+        renderList();
+        alert(`🔄 已更新 ${date} 的健康記錄（覆蓋前次內容）！`);
+      } else {
+        // 新增至最上方
+        logs.unshift(newRecord);
+        persistLogs(logs);
+        resetFormInputs();
+        renderList();
+        alert('✅ 健康記錄已儲存！');
+      }
     });
 
     // 匯出 CSV（含 UTF-8 BOM）
@@ -301,18 +417,19 @@
         return;
       }
 
-      let csv = "\uFEFF"; // 加入 UTF-8 BOM 避免 Excel 開啟中文亂碼
-      csv += "記錄日期,狀態,備註事項,記錄時間\n";
+      let csv = "\uFEFF"; // UTF-8 BOM 防中文亂碼
+      csv += "記錄日期,夜尿與精神狀態,身體不適症狀,備註事項,最後更新時間\n";
 
       logs.forEach(item => {
         const cleanNotes = (item.notes || '').replace(/"/g, '""');
-        csv += `"${item.date}","${item.status}","${cleanNotes}","${item.time}"\n`;
+        const symptomsStr = Array.isArray(item.symptoms) ? item.symptoms.join(';') : (item.symptoms || '');
+        csv += `"${item.date}","${item.status}","${symptomsStr}","${cleanNotes}","${item.time}"\n`;
       });
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const filename = `健康狀態記錄_${new Date().toISOString().split('T')[0]}.csv`;
 
-      // 優先使用 Web Share API（手機可直接儲存至 Google Drive 或檔案）
+      // 優先使用 Web Share API（手機端可直接傳至 LINE、Google Drive 或檔案儲存）
       if (navigator.canShare && navigator.canShare({ files: [new File([blob], filename, { type: 'text/csv' })] })) {
         const file = new File([blob], filename, { type: 'text/csv' });
         navigator.share({
