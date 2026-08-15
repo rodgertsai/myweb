@@ -1,205 +1,70 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="mystyle.css" />
-    <script type="text/javascript" src="myfunc.js"></script>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello World</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-  </head>
-  <body>
-    <header>
-      <div class="flex-container2">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-      </div>
-    </header>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+      color: #102a43;
+      padding: 1rem;
+    }
 
-    <div id="navbar">
-      <a class="active" href="javascript:void(0)">Home</a>
-      <a href="javascript:void(0)">News</a>
-      <a href="javascript:void(0)">Contact</a>
-    </div>
+    .card {
+      background: #ffffff;
+      padding: 2.5rem 2rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+    }
 
-    <div class="content">
-      <a href="http://tw.yahoo.com" role="button">WWW</a>
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #2563eb;
+      background-color: #eff6ff;
+      border-radius: 9999px;
+      margin-bottom: 1.25rem;
+    }
 
-      <h3>Sticky Navigation Example</h3>
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.025em;
+    }
 
-      <p>
-        The navbar will stick to the top when you reach its scroll position.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        The navbar will stick to the top when you reach its scroll position.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        The navbar will stick to the top when you reach its scroll position.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-      <p>
-        Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum
-        definitiones no quo, maluisset concludaturque et eum, altera fabulas ut
-        quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert
-        laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no
-        molestiae voluptatibus.
-      </p>
-    </div>
+    p {
+      font-size: 1rem;
+      color: #64748b;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
 
-    <div class="content2" data-op="QQ">
-      <p id="p1">AAA</p>
-      <p id="p2" data-op="QQ2">BBB</p>
-      <p id="p3" data-op="QQ3">CCC</p>
-    </div>
+  <main class="card">
+    <span class="badge">GitHub Pages Ready</span>
+    <h1>Hello World 2!</h1>
+    <p>恭喜！你的網頁已成功在本地端建立與運行。</p>
+  </main>
 
-    <button onclick="myFunction()">Click me</button>
-
-    <footer>
-      <div class="flex-container">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-      </div>
-    </footer>
-  </body>
+</body>
 </html>
